@@ -1,3 +1,4 @@
+//adiciona mensagem no chat
 function enviaMensagem() {
   const form = new FormData(document.querySelector('form'));
   const mensagem = form.get('mensagem');
@@ -8,6 +9,17 @@ function enviaMensagem() {
 
   const chat = document.querySelector('.chat-body');
 
+  const msgDiv = criaMensagem(mensagem);
+
+  chat.appendChild(msgDiv);
+
+  chat.scrollTop = chat.scrollHeight;
+
+  limpaInput();
+}
+
+//recebe string com a mensagem e transforma em uma estrutura html estilizada
+function criaMensagem(mensagem) {
   const msgDiv = document.createElement('div');
   const labelDiv = document.createElement('div');
   const label = document.createElement('label');
@@ -23,9 +35,14 @@ function enviaMensagem() {
   msgDiv.appendChild(labelDiv);
   msgDiv.appendChild(msgBoxDiv);
 
+  return msgDiv;
+}
 
-  chat.appendChild(msgDiv)
-  chat.scrollTop = chat.scrollHeight;
+//limpa a caixa de texto
+function limpaInput() {
+  const input = document.querySelector('input[name="mensagem"]');
 
-  document.querySelector('input[name="mensagem"]').value = '';
+  if (input) {
+    input.value = '';
+  }
 }
