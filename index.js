@@ -48,7 +48,7 @@ function limpaInput() {
 }
 
 //cria aviso na tela
-function criaAviso(titulo, conteudo) {
+function criaAviso(titulo, conteudo, timeoutMs = 3000) {
   const avisoDiv = document.createElement('div');
   const titleDiv = document.createElement('div');
   const titleTextSpan = document.createElement('span');
@@ -76,4 +76,16 @@ function criaAviso(titulo, conteudo) {
   avisoDiv.appendChild(contentDiv);
 
   mensagensDiv.appendChild(avisoDiv);
+
+  avisoDiv.classList.add('appear');
+  avisoDiv.style.display = 'block';
+
+  setTimeout(() => {
+    avisoDiv.classList.remove('appear');
+    avisoDiv.classList.add('disappear');
+  }, timeoutMs);
+
+  setTimeout(() => {
+    mensagensDiv.removeChild(avisoDiv);
+  }, timeoutMs + 500);
 }
